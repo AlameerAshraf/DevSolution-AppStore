@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="DeveSolution">
+	<meta name="author" content="Alameer Ashraf">
+	<link rel="icon" href="./img/Favicon.png">
+	<title>DeveSolution - Developers App Store</title>
+	<!-- Bootstrap Core CSS -->
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="./css/modern-business.css" rel="stylesheet">
+	<!-- Custom Fonts -->
+	<script src="https://use.fontawesome.com/993c0d2f82.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="index.html" style="font-weight:bold;">DeveSolution</a> </div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li> <a href="http://localhost:1337/about">About</a> </li>
+					<li> <a href="http://localhost:1337/login">Login!</a> </li>
+					<li> <a href="http://localhost:1337/Signup" style="color:aliceblue; font-weight:bold;">SignUp</a> </li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<header id="myCarousel" class="carousel slide">
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="item active">
+				<div class="fill" style="background-image: url('./img/vs.jpg');"></div>
+				<div class="carousel-caption">
+					<h2>Visual Studion 2015</h2> </div>
+			</div>
+			<div class="item">
+				<div class="fill" style="background-image: url('./img/br.png');"></div>
+			</div>
+			<div class="item">
+				<div class="fill" style="background-image: url('./img/npp.jpg');"></div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span class="icon-prev"></span> </a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next"> <span class="icon-next"></span> </a>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">
+            Welcom in DeveSolution ! 
+        </h1> </div>
+			<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4><i class="fa fa-fw fa-check"></i> Get Your Account Now !</h4> </div>
+					<div class="panel-body">
+						<form ng-app="myFormSignup" ng-controller="Validation" name="form" novalidate>
+							<div class="form-group">
+								<label for="exampleInputPassword1">User Name</label>
+								<input ng-model="unn" name="unn" type="text" class="form-control " id="UN" placeholder="User Name" required> <span style="color:red" ng-show="form.unn.$dirty && form.unn.$invalid"></span>
+								<span style="color:red;" ng-show="form.unn.$error.required">*Username is required.</span> </div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Your Job</label>
+								<input name="job" ng-model="job" type="text" class="form-control " id="Job" placeholder="C# Developer" required> <span style="color:red" ng-show="form.job.$dirty && form.job.$invalid"></span>
+								<span style="color:red;" ng-show="form.job.$error.required">*Job is required.</span> </div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Email</label>
+								<input name="mail" ng-model="mail" type="email" class="form-control " id="Email" placeholder="C#@iti.com" required> 
+								<span  ng-show="form.mail.$dirty && form.mail.$invalid"></span>
+								<span style="color:red" ng-show="form.mail.$error.email">*Inter a valid Mail</span> 
+								<span style="color:red" ng-show="form.mail.$error.required">*Email Is Requiered</span> </div>
+							<div class="form-group"> 
+								<div class="input-group">
+								<span class="input-group-addon">
+        						<input type="checkbox" aria-label="..." ng-model="showpassword" ng-checked="false">
+								</span>
+								<input class="form-control" ng-show="showpassword" type="text" ng-model="password">
+								<input class="form-control" ng-hide="showpassword" type="password" ng-model="password">
+								</div>
+							</div>
+							
+							
+							<input type="submit"
+								   ng-disabled="form.unn.$dirty && form.unn.$invalid ||  
+												form.mail.$dirty && form.mail.$invalid ||
+												form.job.$dirty && form.job.$invalid"
+								   class="btn btn-danger">
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; DeveSolution 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="./js/jquery.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/angular.min.js"></script>
+	<script src="./Controllers/Validation-Signup.js"></script>
+	<script>
+		$('.carousel').carousel({
+			interval: 5000
+		})
+	</script>
+</body>
+
+</html>

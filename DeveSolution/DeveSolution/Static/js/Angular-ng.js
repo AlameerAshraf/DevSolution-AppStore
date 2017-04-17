@@ -1,16 +1,17 @@
-var Main = angular.module('Main', ['ngRoute']);
+var Main = angular.module('Main');
 
-Main.config(function ($routeProvider, $locationProvider) {
-    $routeProvider
-        .when('/HomeView', {
-            templateUrl: '/HomeView.html',
-            controller : 'HomeController'
-        })
-    $locationProvider.hashPrefix('');
-});
+//Main.config(function ($routeProvider, $locationProvider) {
+//    $routeProvider
+//        .when('/', {
+//            templateUrl: '/Home.ejs',
+//            controller : 'HomeController'
+//        })
+//    $locationProvider.hashPrefix('');
+//});
 
 
     
 Main.controller('HomeController', function ($scope) {
     console.log("as");
 });
+
