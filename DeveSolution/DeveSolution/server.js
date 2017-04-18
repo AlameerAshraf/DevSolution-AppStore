@@ -170,7 +170,8 @@ client.connect(dbaccessurl, function (err, db) {
                 "Appsourcelink": AppDownloder,
                 "AppImagelink": ImageApp,
                 "username": SessionVar.username,
-                "Description": Description
+                "Description": Description, 
+                "DownlodedLink" : As.name
             };
 
 
@@ -244,7 +245,8 @@ client.connect(dbaccessurl, function (err, db) {
                     AppImagelink: result.AppImagelink,
                     vendor: result.Appvendor,
                     Appcode: result.Appcode,
-                    Description: result.Description
+                    Description: result.Description,
+                    Download: "http://localhost:1337/Download?Code=" + result.Appcode
                 })
                 console.log(result);
             }, function (err) {
@@ -273,7 +275,7 @@ client.connect(dbaccessurl, function (err, db) {
 
 
             promise.then(function (result) {
-                path = __dirname + '/Repositorie/FilesRepo/' + result.Appcode+"."+"png";
+                path = __dirname + '/Repositorie/FilesRepo/' + result.DownlodedLink;
                 res.download(path);
                // res.send("A");
             }, function (err) {
