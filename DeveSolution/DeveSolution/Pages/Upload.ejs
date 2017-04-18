@@ -24,7 +24,9 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li> <a href="http://localhost:1337/about">About</a> </li>
-					<li> <a href="http://localhost:1337/login">Login!</a> </li>
+						<% if (username) { %>
+  							<li><a href="http://localhost:1337/login"><%= username %></a> </li>
+						<% } %>
 					<li> <a href="http://localhost:1337/Signup" style="color:aliceblue; font-weight:bold;">SignUp</a> </li>
 				</ul>
 			</div>

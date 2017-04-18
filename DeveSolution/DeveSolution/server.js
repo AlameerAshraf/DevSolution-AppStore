@@ -1,6 +1,7 @@
 
 var express = require('express');
 var mongodb = require('mongodb');
+var session = require('express-session');
 var path = require('path');
 var app = express();
 var BodyParser = require('body-parser');
@@ -12,8 +13,32 @@ var dbaccessurl = "mongodb://127.0.0.1:27017/DeveSolutions";
 
 
 app.set("view engine", "ejs");
-app.use(BodyParser());
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
+app.use(session({ secret: 'ssshhhhh' }));
+
+
+
+
+var sess; 
+app.get('/Stest', function (req, res) {
+    sess = req.session;
+    sess.name = "Alameer Ashraf";
+    res.render(__dirname + "/Pages/Home.ejs")
+})    
+
+app.get('/Scome', function (req, res) {
+    sess = req.session;
+    console.log(sess.name);
+})
+app.get('/Ssuper', function (req, res) {
+    sess = req.session;
+    console.log(sess.name);
+})
+
+
+var SessionVar; 
 
 client.connect(dbaccessurl, function (err, db) {
     if (err)
@@ -55,7 +80,7 @@ client.connect(dbaccessurl, function (err, db) {
             res.redirect("/login");
         });
 
-
+        // POST login view .. 
         app.post("/login", function (req, res) {
             var mail = req.body.mail;
             var password = req.body.password;
@@ -65,7 +90,7 @@ client.connect(dbaccessurl, function (err, db) {
                 users.findOne({ "Email": mail }, function (err, res) {
                     if (res != null && res.password == password)
                     {
-                        resolve("Done");
+                        resolve(res);
                     }
                     else {
                         reject("Bad");
@@ -75,7 +100,11 @@ client.connect(dbaccessurl, function (err, db) {
 
 
             promise.then(function (result) {
-                res.redirect("/Upload");
+                SessionVar = req.session;
+                SessionVar.username = result.username;
+                console.log(result.username)
+                console.log(result);
+                res.redirect("/AppFeed");
             }, function (err) {
                 res.redirect("/login")
                 });
@@ -86,23 +115,20 @@ client.connect(dbaccessurl, function (err, db) {
 
         
 
-
-        app.get("/testdb", function (req, res) {
-            users.find().toArray(function (err, data) {
-                if (err)
-                {
-                    console.log("err")
-                }
-                else {
-                    console.log(data[0].username);
-                }
-            })
-        })
+        
     }
 })
 
 
 
+
+app.get("/AppFeed", function (req, res) {
+    SessionVar = req.session;
+
+    res.render(__dirname + "/Pages/Feed.ejs", {
+        username: SessionVar.username
+    })
+})
 
 
 app.get("/", function (req, res) {
@@ -123,7 +149,11 @@ app.get("/login", function (req, res) {
 
 
 app.get("/Upload", function (req, res) {
-    res.render(__dirname + "/Pages/Upload.ejs");
+    SessionVar = req.session;
+    
+    res.render(__dirname + "/Pages/Upload.ejs", {
+        username: SessionVar.username
+    });
 })
 
 app.get("/signup.html", function (req, res) {
