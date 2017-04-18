@@ -1,0 +1,71 @@
+{
+	"_id" : ObjectId("58f66ba0d4c1ceaf402dcd2a"),
+	"Appcode" : "github Windows",
+	"AppImagelink" : ".\\ImagesRepo\\github Windows.jpg",
+	"Appsourcelink" : ".\\FilesRepo\\github Windows.jpg",
+	"Appvendor" : "github",
+	"Description" : "You’ll find all the projects you’re working on listed in the sidebar. If you’re starting a new project, use the repository drop down menu to create a new repository or clone an existing one directly from GitHub.com.",
+	"username" : "Alamir Ashraf",
+	"Vendorsite" : "https://desktop.github.com/"
+},
+{
+	"_id" : ObjectId("58f66d0ad4c1ceaf402dcd2c"),
+	"Appcode" : "Visual Code",
+	"AppImagelink" : ".\\ImagesRepo\\Visual Code.png",
+	"Appsourcelink" : ".\\FilesRepo\\Visual Code.png",
+	"Appvendor" : "Microsoft",
+	"Description" : "Go beyond syntax highlighting and autocomplete with IntelliSense, which provides smart completions based on variable types, function definitions, and imported modules.",
+	"username" : "Eman",
+	"Vendorsite" : "https://code.visualstudio.com/"
+},
+{
+	"_id" : ObjectId("58f66e64d4c1ceaf402dcd2d"),
+	"Appcode" : "soundcloud",
+	"AppImagelink" : ".\\ImagesRepo\\soundcloud.png",
+	"Appsourcelink" : ".\\FilesRepo\\soundcloud.png",
+	"Appvendor" : "soundcloud",
+	"Description" : "If you wish to have an official release of yours on your SoundCloud profile, then you can mark a Playlist as an Album, EP, Single or a Compilation. This will then show up under the Albums tab on your profile.  Just go to the Playlist’s edit page and edit the Playlist type section accordingly :    You’ll need to set a release date for your Album, hit save and then you’re good to go. ",
+	"username" : "Hisham Karam",
+	"Vendorsite" : "https://soundcloud.com/stream"
+},
+{
+	"_id" : ObjectId("58f66f3bd4c1ceaf402dcd2e"),
+	"Appcode" : "npm",
+	"AppImagelink" : ".\\ImagesRepo\\npm.png",
+	"Appsourcelink" : ".\\FilesRepo\\npm.png",
+	"Appvendor" : "NPM",
+	"Description" : " Join the modular development revolution  Every month, more than 6.5 million developers use npm to find, share, and reuse code — and assemble it in powerful new ways.",
+	"username" : "Hisham Karam",
+	"Vendorsite" : "https://www.npmjs.com/"
+},
+{
+	"_id" : ObjectId("58f66fd6d4c1ceaf402dcd2f"),
+	"Appcode" : "stackoverflow",
+	"AppImagelink" : ".\\ImagesRepo\\stackoverflow.png",
+	"Appsourcelink" : ".\\FilesRepo\\stackoverflow.png",
+	"Appvendor" : "stackoverflow",
+	"Description" : "Stack Overflow is a community of 7.0 million programmers, just like you, helping each other. Join them; it only takes a minute: ",
+	"username" : "AlaaAshraf",
+	"Vendorsite" : "http://stackoverflow.com/"
+},
+{
+	"_id" : ObjectId("58f68baad550cf225c0a7f57"),
+	"Appcode" : "fgfg.png",
+	"AppImagelink" : ".\\ImagesRepo\\fgfg.png",
+	"Appsourcelink" : ".\\FilesRepo\\fgfg.png",
+	"Appvendor" : "Microsoft",
+	"Description" : "Private packages for the whole team It’s never been easier to manage developer teams with varying permissions and multiple projects. Learn more about Private Packages and Organizations…",
+	"username" : "Alamir Ashraf",
+	"Vendorsite" : "https://github.com/AlameerAshraf/DevSolution-AppStore"
+},
+{
+	"_id" : ObjectId("58f68d38d63873a024f1414e"),
+	"Appcode" : "Ali",
+	"AppImagelink" : ".\\ImagesRepo\\Ali.jpg",
+	"Appsourcelink" : ".\\FilesRepo\\Ali.jpg",
+	"Appvendor" : "MAI",
+	"Description" : "You’ll find all the projects you’re working on listed in the sidebar. If you’re starting a new project, use the repository drop down menu to create a new repository or clone an existing one directly from GitHub.com.",
+	"DownlodedLink" : "Ali.jpg",
+	"username" : "Alamir Ashraf",
+	"Vendorsite" : "WWW.SS.COM"
+},
