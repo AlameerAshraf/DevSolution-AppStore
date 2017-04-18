@@ -113,7 +113,49 @@ client.connect(dbaccessurl, function (err, db) {
         });
 
 
-        
+        // File Uploading ... 
+        app.post("/UploadFile", function (req, res) {
+            var appcode = req.body.Code;
+            var Vendor = req.body.Vendor;
+            var VedorSite = req.body.Vsite;
+            SessionVar = req.session;
+
+            Vl = req.files.VLogo;
+
+            VendorLogo = __dirname + '/Repositorie/ImagesRepo/' + Vl.name;
+
+            Vl.mv(VendorLogo, function (err) {
+                if (err)
+                    return res.status(500).send(err);
+            });
+
+            Al = req.files.ALogo;
+
+            AppLogo = __dirname + '/Repositorie/ImagesRepo/' + Al.name;
+
+            Al.mv(AppLogo, function (err) {
+                if (err)
+                    return res.status(500).send(err);
+            });
+
+            As = req.files.Source;
+
+            AppSource = __dirname + '/Repositorie/FilesRepo/' + As.name;
+
+            As.mv(AppSource, function (err) {
+                if (err)
+                    return res.status(500).send(err);
+            });
+
+
+            res.render(__dirname + "/Pages/UploadDone.ejs", {
+                username: SessionVar.username,
+                AC: appcode,
+                V: Vendor,
+                VPS: VedorSite
+            })
+
+        })
 
         
     }
@@ -156,32 +198,12 @@ app.get("/Upload", function (req, res) {
     });
 })
 
-app.get("/signup.html", function (req, res) {
-    console.log("Home");
-    res.sendFile(__dirname + "/HomeView.html");
+app.get("/UploadRecept", function (req, res) {
+    res.render(__dirname + "/Pages/UploadDone.ejs")
 })
 
 
-// File Uploading ... 
-app.post("/UploadFile", function (req, res) {
-        console.log("FileToBeUploaded");
-        console.log(req.files.VLogo.name);
 
-        sampleFile = req.files.VLogo;
-
-        uploadPath = __dirname + '/Repositorie/' + sampleFile.name;
-
-        sampleFile.mv(uploadPath, function (err) {
-            if (err)
-                return res.status(500).send(err);
-
-            res.send('File uploaded to ' + uploadPath);
-        });
-        //console.log(req.files.Source);
-        //console.log(req.files.ALogo);
-        console.log(req.body.Vsite);
-
-})
 
 
 app.use(express.static("./Static"));
