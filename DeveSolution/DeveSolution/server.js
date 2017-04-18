@@ -1,6 +1,7 @@
 
 var express = require('express');
 var mongodb = require('mongodb');
+var url = require('url');
 var session = require('express-session');
 var path = require('path');
 var app = express();
@@ -36,6 +37,8 @@ app.get('/Ssuper', function (req, res) {
     sess = req.session;
     console.log(sess.name);
 })
+
+
 
 
 var SessionVar; 
@@ -119,6 +122,7 @@ client.connect(dbaccessurl, function (err, db) {
             var appcode = req.body.Code;
             var Vendor = req.body.Vendor;
             var VedorSite = req.body.Vsite;
+            var Description = req.body.Des;
             SessionVar = req.session;
 
             Vl = req.files.VLogo;
@@ -126,6 +130,7 @@ client.connect(dbaccessurl, function (err, db) {
             Vl.name = Vendor + "." + Ext;
 
             VendorLogo = __dirname + '/Repositorie/ImagesRepo/' + Vl.name;
+            VendorImage = ".\\ImagesRepo\\" + Vl.name;
 
             Vl.mv(VendorLogo, function (err) {
                 if (err)
@@ -136,6 +141,7 @@ client.connect(dbaccessurl, function (err, db) {
             var Ext1 = Al.name.split('.').pop();
             Al.name = appcode + "." + Ext1;
             AppLogo = __dirname + '/Repositorie/ImagesRepo/' + Al.name;
+            ImageApp = ".\\ImagesRepo\\" + Al.name;
 
             Al.mv(AppLogo, function (err) {
                 if (err)
@@ -147,6 +153,7 @@ client.connect(dbaccessurl, function (err, db) {
             As.name = appcode+"." + Ext1; 
 
             AppSource = __dirname + '/Repositorie/FilesRepo/' + As.name;
+            AppDownloder = ".\\FilesRepo\\" + As.name;
 
             As.mv(AppSource, function (err) {
                 if (err)
@@ -158,9 +165,10 @@ client.connect(dbaccessurl, function (err, db) {
                 "Appcode": appcode,
                 "Appvendor": Vendor,
                 "Vendorsite": VedorSite,
-                "Appsourcelink": AppSource,
-                "AppImagelink": AppLogo,
-                "username" : SessionVar.username
+                "Appsourcelink": AppDownloder,
+                "AppImagelink": ImageApp,
+                "username": SessionVar.username,
+                "Description": Description
             };
 
 
@@ -183,7 +191,8 @@ client.connect(dbaccessurl, function (err, db) {
                     username: SessionVar.username,
                     AC: appcode,
                     V: Vendor,
-                    VPS: VedorSite
+                    VPS: VedorSite,
+                    DES: Description
                 })
             }, function (err) {
                 res.redirect('/Upload')
@@ -199,6 +208,49 @@ client.connect(dbaccessurl, function (err, db) {
             db.collection('apps').find().toArray(function (err, collInfos) {
                 res.send(collInfos);
             });
+        })
+
+        //Get 
+        app.get(new RegExp("apps(\\.(?:htm|html))?(\\?.*)?$"), function (req, res) {
+            SessionVar = req.session;
+
+            var queryData = url.parse(req.url, true).query;
+
+            var Code = queryData.Code;
+            console.log(Code)
+            var promise = new Promise(function (resolve, reject) {
+                db.collection("apps").findOne({ "Appcode": Code }, function (err, res) {
+                    if (res != null) {
+                        resolve(res);
+                    }
+                    else {
+                        reject("Bad");
+                    }
+                })
+            })
+
+
+            promise.then(function (result) {
+                //SessionVar = req.session;
+                //SessionVar.username = result.username;
+                //console.log(result.username)
+                //console.log(result);
+                //res.redirect("/AppFeed");
+
+                res.render(__dirname + "/Pages/AppView.ejs", {
+                    username: SessionVar.username,
+                    AppImagelink: result.AppImagelink,
+                    vendor: result.Appvendor,
+                    Appcode: result.Appcode,
+                    Description: result.Description
+                })
+                console.log(result);
+            }, function (err) {
+                res.redirect("/login")
+            });
+
+
+
         })
 
         
@@ -251,5 +303,6 @@ app.get("/UploadRecept", function (req, res) {
 
 
 app.use(express.static("./Static"));
+app.use(express.static("./Repositorie"));
 
 app.listen(1337);
