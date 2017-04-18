@@ -29,8 +29,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="server.js" />
+    <Compile Include="Static\Controllers\Applications-Feed.js" />
     <Compile Include="Static\Controllers\Validation-Signup.js" />
     <Compile Include="Static\js\Angular-ng.js" />
+    <Compile Include="Static\Controllers\Signin-validate.js" />
     <Content Include="Home.html">
       <SubType>Code</SubType>
     </Content>
@@ -42,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Static\" />
+    <Folder Include="Static\Controllers\" />
     <Folder Include="Static\js\" />
     <Folder Include="Views\" />
   </ItemGroup>
