@@ -63,7 +63,7 @@
 					<div class="panel-heading">
 						<h4><i class="fa fa-fw fa-check"></i> Get Your Account Now !</h4> </div>
 					<div class="panel-body">
-						<form ng-app="myFormSignup" ng-controller="Validation" name="form" novalidate>
+						<form action="http://localhost:1337/Signup" method="post" ng-app="myFormSignup" ng-controller="Validation" name="form" novalidate>
 							<div class="form-group">
 								<label for="exampleInputPassword1">User Name</label>
 								<input ng-model="unn" name="unn" type="text" class="form-control " id="UN" placeholder="User Name" required> <span style="color:red" ng-show="form.unn.$dirty && form.unn.$invalid"></span>
@@ -79,12 +79,14 @@
 								<span style="color:red" ng-show="form.mail.$error.email">*Inter a valid Mail</span> 
 								<span style="color:red" ng-show="form.mail.$error.required">*Email Is Requiered</span> </div>
 							<div class="form-group"> 
+															<label >password</label>
+
 								<div class="input-group">
 								<span class="input-group-addon">
         						<input type="checkbox" aria-label="..." ng-model="showpassword" ng-checked="false">
 								</span>
-								<input class="form-control" ng-show="showpassword" type="text" ng-model="password">
-								<input class="form-control" ng-hide="showpassword" type="password" ng-model="password">
+								<input name="password" class="form-control" ng-show="showpassword" type="text" ng-model="password">
+								<input  class="form-control" ng-hide="showpassword" type="password" ng-model="password">
 								</div>
 							</div>
 							
