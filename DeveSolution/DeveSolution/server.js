@@ -159,7 +159,8 @@ client.connect(dbaccessurl, function (err, db) {
                 "Appvendor": Vendor,
                 "Vendorsite": VedorSite,
                 "Appsourcelink": AppSource,
-                "AppImagelink": AppLogo
+                "AppImagelink": AppLogo,
+                "username" : SessionVar.username
             };
 
 
@@ -190,6 +191,14 @@ client.connect(dbaccessurl, function (err, db) {
 
           
 
+        })
+
+
+        //Return all apps .. 
+        app.get("/Applications", function (req, res) {
+            db.collection('apps').find().toArray(function (err, collInfos) {
+                res.send(collInfos);
+            });
         })
 
         
