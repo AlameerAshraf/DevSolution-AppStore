@@ -1,7 +1,9 @@
 
 var express = require('express');
+var router = express.Router();
 var mongodb = require('mongodb');
 var url = require('url');
+var download = require('download-file');
 var session = require('express-session');
 var path = require('path');
 var app = express();
@@ -253,11 +255,64 @@ client.connect(dbaccessurl, function (err, db) {
 
         })
 
+
+        // Download .. 
+        app.get(new RegExp("Download(\\.(?:htm|html))?(\\?.*)?$"), function (req, res, next) {
+            var queryData = url.parse(req.url, true).query;
+            var Code = queryData.Code;
+            var promise = new Promise(function (resolve, reject) {
+                db.collection("apps").findOne({ "Appcode": Code }, function (err, res) {
+                    if (res != null) {
+                        resolve(res);
+                    }
+                    else {
+                        reject("Bad");
+                    }
+                })
+            })
+
+
+            promise.then(function (result) {
+                path = __dirname + '/Repositorie/FilesRepo/' + result.Appcode+"."+"png";
+                res.download(path);
+               // res.send("A");
+            }, function (err) {
+                res.redirect("/login")
+                });
+            
+
+            
+        });
+
+        app.use(function (err, req, res, next) {
+            // special-case 404s,
+            // remember you could
+            // render a 404 template here
+            if (404 == err.status) {
+                res.statusCode = 404;
+                res.send('Cant find that file, sorry!');
+            } else {
+                res.send("as")
+                next(err);
+            }
+        });
+
+      
+
+
+      
         
     }
 })
 
-
+//promise.then(function (result) {
+//    var filepath = result.Appsourcelink;
+//    var filename = result.Appcode;
+//    res.download(filepath.filename);
+//})
+//        }, function (err) {
+//    res.redirect("/login")
+//});
 
 
 app.get("/AppFeed", function (req, res) {
