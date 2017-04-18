@@ -50,6 +50,7 @@ client.connect(dbaccessurl, function (err, db) {
      
 
         var users = db.collection("users");
+        var apps = db.collection("apps");
 
         //POST signup view ..
         app.post("/signup", function (req, res) {
@@ -121,6 +122,8 @@ client.connect(dbaccessurl, function (err, db) {
             SessionVar = req.session;
 
             Vl = req.files.VLogo;
+            var Ext = Vl.name.split('.').pop();
+            Vl.name = Vendor + "." + Ext;
 
             VendorLogo = __dirname + '/Repositorie/ImagesRepo/' + Vl.name;
 
@@ -130,7 +133,8 @@ client.connect(dbaccessurl, function (err, db) {
             });
 
             Al = req.files.ALogo;
-
+            var Ext1 = Al.name.split('.').pop();
+            Al.name = appcode + "." + Ext1;
             AppLogo = __dirname + '/Repositorie/ImagesRepo/' + Al.name;
 
             Al.mv(AppLogo, function (err) {
@@ -139,6 +143,8 @@ client.connect(dbaccessurl, function (err, db) {
             });
 
             As = req.files.Source;
+            var Ext2 = As.name.split('.').pop();
+            As.name = appcode+"." + Ext1; 
 
             AppSource = __dirname + '/Repositorie/FilesRepo/' + As.name;
 
@@ -148,12 +154,41 @@ client.connect(dbaccessurl, function (err, db) {
             });
 
 
-            res.render(__dirname + "/Pages/UploadDone.ejs", {
-                username: SessionVar.username,
-                AC: appcode,
-                V: Vendor,
-                VPS: VedorSite
+            var Doc = {
+                "Appcode": appcode,
+                "Appvendor": Vendor,
+                "Vendorsite": VedorSite,
+                "Appsourcelink": AppSource,
+                "AppImagelink": AppLogo
+            };
+
+
+            var promise = new Promise(function (resolve, reject) {
+                console.log("as");
+                db.collection('apps').insert(Doc, function (err, records) {
+                    if (err)
+                        reject("bad");
+                    else
+                        resolve("done");
+                });
             })
+
+           
+        
+
+
+            promise.then(function (result) {
+                res.render(__dirname + "/Pages/UploadDone.ejs", {
+                    username: SessionVar.username,
+                    AC: appcode,
+                    V: Vendor,
+                    VPS: VedorSite
+                })
+            }, function (err) {
+                res.redirect('/Upload')
+            });
+
+          
 
         })
 
