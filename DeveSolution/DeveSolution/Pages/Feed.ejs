@@ -15,6 +15,13 @@
 	<link href="./css/shop-homepage.css" rel="stylesheet">
 	<!-- Custom Fonts -->
 	<script src="https://use.fontawesome.com/993c0d2f82.js"></script>
+	<style>
+		.Img {
+    max-height: 320;  
+			min-height: 320;
+
+}
+	</style>
 </head>
 
 <body>
@@ -53,7 +60,9 @@
 						
 				      <div ng-repeat="x in names | orderBy:'Appcode'" class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
+							<div class="Img">
                             <img ng-src="{{x.AppImagelink}}" alt="">
+								</div>
                             <div class="caption">
                                 <h4 class="pull-right">{{x.Appcode}}</h4>
                                 <h4><a ng-href="http://localhost:1337/apps?Code={{x.Appcode}}">{{x.Appcode}}</a>

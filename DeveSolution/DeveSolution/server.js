@@ -330,6 +330,10 @@ app.get("/", function (req, res) {
     res.render(__dirname + "/Pages/Home.ejs")
 })
 
+app.get("/index", function (req, res) {
+    res.render(__dirname + "/Pages/Home.ejs")
+})
+
 
 //GET signup view ..
 app.get("/signup", function (req, res) {
